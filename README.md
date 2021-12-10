@@ -2,6 +2,8 @@
 
 Compact scale with OLED display - Hardware and code
 
+![image](https://user-images.githubusercontent.com/12587056/145628375-a3acac8c-aebe-4db4-b823-13afd2103d17.png)
+
 ## Code
 
 The code is included in the code folder.
@@ -26,12 +28,20 @@ Theese are the referenced libraries.
 
 ## Hardware modifications and details
 
+![image](https://user-images.githubusercontent.com/12587056/145628960-f516cf97-24d5-411e-9fc7-a1609de76eb7.png)
+
 I removed the microcontroller power LED and voltage regulator so that the battery last longer. I used an external MCP1702-3302E voltage regulator. *I need to document this more*
 
 You can use an Arduino Nano microcontroller but then you can't power off the serial-USB interface and it will drain power too. Arduino Pro Mini doesn't have one. You have to use an external Serial adaptor.
 
 The microcontroller enters sleep mode waiting for interrupt to wake up. *I need to document this more*
 
+16 MHz microcontroller maybe should be used with 5v but screen is 3.3v and HX711 supports both. I'm using 3.3v for everything with no trouble.
+
 You should use a transistor to power on the HX711 while awake and power it down while in sleep mode. I'm opening the circuit by the ground side to power down. *I need to document this more*
 
-16 MHz microcontroller maybe should be used with 5v but screen is 3.3v and HX711 supports both. I'm using 3.3v for everything with no trouble.
+It seems (I am actually reverse engineering my own circuit) as I open the circuit from the ground side I put a pull-up resistor on the data an clock lines.
+
+![image](https://user-images.githubusercontent.com/12587056/145629880-48ef841f-73d4-40cb-9522-efac9c3eb6be.png)
+
+If you need more detail or want to improve my circuit please open a issue or pull-request.
